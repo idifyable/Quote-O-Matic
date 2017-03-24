@@ -1,12 +1,13 @@
 var apiURL = "https://quotesondesign.com/wp-json/posts" + "?filter[orderby]=rand" + "&filter[posts_per_page]=" + "&callback=?";
-
 var currentQuote = "";
 var currentName = "";
 var nextQuote = "";
 var nextName = "";
 
 $(document).ready(function () {
+
     // Caches first quote
+
     console.log("ready");
     $.ajax({
         url: apiURL,
@@ -18,6 +19,7 @@ $(document).ready(function () {
         cache: false
     });
 
+    //Event handler for new quote button
 
 $('#new-quote').on('click', function getNewQuote() {
     console.log("test");
@@ -40,12 +42,15 @@ $('#new-quote').on('click', function getNewQuote() {
     });
 });
 
+    //Event handler for twitter sharing
 $("#share-twitter").on('click', function () {
     var quoteBody = $("#quote").text().trim();
     var quoteAuthor = $("#name").text().trim();
     var tweet = quoteBody + " - " + quoteAuthor;
+        // Shortens tweet to under 140 characters
     tweet = tweet.substring(0, 140 - 3) + "...";
     var twitterShareLink = "https://twitter.com/intent/tweet?text=" + tweet;
+        // Opens twitter share tab/window
     window.open(twitterShareLink);
 });
 });
